@@ -14,7 +14,13 @@ router.post('/', isFullDataInUserRequest, checkUserAvailability('email'), isUser
 
 router.use('/:userId', isUserIdFormatCorrect);
 
-router.patch('/:userId', isUpdateUserDataSent, checkUserAvailability('userId', 'params', '_id'), isUserExists, updateUser);
+router.patch('/:userId',
+    isUpdateUserDataSent,
+    checkUserAvailability('userId', 'params', '_id'),
+    isUserExists,
+    checkUserAvailability('email'),
+    isUserNotExists,
+    updateUser);
 
 router.use('/:userId', checkUserAvailability('userId', 'params', '_id'), isUserExists);
 
